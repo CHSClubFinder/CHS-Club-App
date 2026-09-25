@@ -5,6 +5,8 @@ import { useState } from "react";
 const MainScreen = () => {
     const [searchInput, setSearchInput] = useState("")
     const [search, setSearch] = useState("")
+
+    /** Returns each value in an array of strings separated by commas */
     function printArray(arr:string[]) {
         var arrStr = "";
         for (let i = 0; i < arr.length; i++) {
@@ -16,9 +18,12 @@ const MainScreen = () => {
         }
         return arrStr;
     }
+
+    /** Returns true if the search bar has the same characters as a club title, or no characters at all */
     function searchBool(title:string) {
         return searchInput.toLowerCase() == title.substring(0, searchInput.length).toLowerCase() || searchInput == ""
     }
+
     return (
         <div className="MainScreen">
             <input onKeyDown={(e) => {
@@ -31,7 +36,14 @@ const MainScreen = () => {
                 {  
                     clubs.filter((element) => searchBool(element.title)).map((clubs,i) => (
                         <div key={i}>
-                            <ClubComponent title={clubs.title} description={clubs.description} subjects={printArray(clubs.subjects)} advisor = {clubs.advisor} meetingTime={printArray(clubs.meetingTime)} calendar={clubs.calendar} image={clubs.image}/>
+                            <ClubComponent 
+                                title={clubs.title} 
+                                description={clubs.description} 
+                                subjects={printArray(clubs.subjects)} 
+                                advisor = {clubs.advisor} 
+                                meetingTime={printArray(clubs.meetingTime)} 
+                                calendar={clubs.calendar} image={clubs.image}
+                            />
                         </div>
                     ))
                 }
